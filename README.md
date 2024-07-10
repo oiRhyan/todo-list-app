@@ -33,9 +33,86 @@ Para a criação do banco de tarefas foi utilziado o SQLiteHelper do Android o q
  <img src="show/sgbd.png">
 </div>
 
-### Adicionando Tarefas
+## Adicionando Tarefas
+Para a adição de tarefas ao banco de dados foi utilizado a função handler.put() a qual faz a adaptação da Query "INSERT VALUES INTO" do SQL.
+<div>
+ <img src="show/cadastrar.png">
+</div>
 
+### Detalhamento
 
+#### Parâmetro item:
+
+- O parâmetro item é uma instância da classe Tarefas que contém os dados da tarefa a ser salva no banco de dados.
+ContentValues:
+
+- ContentValues é utilizado para armazenar pares chave-valor. Neste caso, ele armazena a descrição da tarefa.
+values.put("descricao", item.descricao) insere o valor da descrição da tarefa no ContentValues com a chave "descricao".
+Bloco try-catch:
+
+- O bloco try tenta inserir os dados da tarefa no banco de dados.
+
+- handler.insert(DataBaseHelper.NOME_TABELA, null, values) insere os dados no banco de dados na tabela especificada por DataBaseHelper.NOME_TABELA.
+Se a inserção for bem-sucedida, uma mensagem de log de sucesso é registrada: Log.v("Cadastrar Tarefa", "Tarefa Cadastrada com Sucesso").
+
+#### Tratamento de Exceção:
+- Se ocorrer uma exceção durante a inserção, o bloco catch captura a exceção.
+Uma mensagem de erro é registrada: Log.e("Cadastrar Tarefa", "Erro ao cadastrar tarefa ${e.message}").
+- A função retorna false, indicando que a operação de salvamento falhou.
+- Se a operação de salvamento for bem-sucedida, a função retorna true.
+
+## Atualizando Tarefas
+Para a atualização de tarefas ao banco de dados foi utilizado a função handler.update() a qual faz a adaptação da Query "UPDATE SET" do SQL.
+<div>
+ <img src="show/atualizar.png">
+</div>
+
+#### Detalhamento
+
+- Args é um array de strings contendo o ID da tarefa a ser atualizada, convertido para string.
+ContentValues content:
+
+- Um objeto ContentValues é instanciado para armazenar os novos valores da tarefa.
+content.put(DataBaseHelper.DESCRICAO_TAREFA, item.descricao) atualiza o valor da descrição da tarefa no ContentValues.
+Bloco try-catch:
+
+- O bloco try tenta executar a atualização dos dados no banco de dados.
+
+- handler: Uma instância de SQLiteDatabase que gerencia o banco de dados.
+DataBaseHelper.NOME_TABELA: Nome da tabela onde os dados serão atualizados.
+content: ContentValues contendo os novos valores da tarefa a serem atualizados.
+"${DataBaseHelper.ID_TAREFA} = ?": Condição WHERE que especifica qual tarefa deve ser atualizada, baseada no ID.
+args: Array de argumentos que substituem o placeholder na condição WHERE.
+
+#### Logging e Retorno:
+
+- Se a atualização for bem-sucedida, a função retorna true.
+- Em caso de exceção durante a atualização, o bloco catch captura a exceção e registra uma mensagem de log de nível ERROR indicando o erro específico.
+A função retorna false se ocorrer algum erro durante a atualização.
+
+## Removendo Tarefas
+Para a remoção de tarefas ao banco de dados foi utilizado a função handler.remove() a qual faz a adaptação da Query "DELETE FROM" do SQL.
+<div>
+ <img src="show/remover.png">
+</div>
+
+### Detalhamento
+
+- Args é um array de strings contendo o ID da tarefa a ser removida, convertido para string.
+Bloco try-catch:
+
+- O bloco try tenta executar a remoção dos dados no banco de dados.
+  
+- handler: Uma instância de SQLiteDatabase uma classe que gerencia o banco de dados.
+- DataBaseHelper.NOME_TABELA: Nome da tabela onde os dados serão removidos.
+"${DataBaseHelper.ID_TAREFA} = ?": Condição WHERE que especifica qual tarefa deve ser removida, baseada no ID.
+args: Array de argumentos que substituem o placeholder na condição WHERE.
+
+### Logging e Retorno:
+
+- Se a remoção for bem-sucedida, a função retorna true.
+- Em caso de exceção durante a remoção, o bloco catch captura a exceção e registra uma mensagem de log de nível ERROR indicando o erro específico.
+A função retorna false se ocorrer algum erro durante a remoção.
 
 ## Acompanhe o desenvolvimento desta e outras aplicações em
 <p>
