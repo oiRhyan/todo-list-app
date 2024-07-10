@@ -24,9 +24,6 @@
 
   
 A criação do Adapter inclui um ViewHolder, que gerencia os elementos e configura os valores a serem passados entre as activities. Diferentemente da criação tradicional do ViewHolder utilizando view: Viewer, neste projeto foi utilizado o recurso de binding, herdado de ItemTarefaBinding. O ItemTarefaBinding é gerado pelo RecyclerView e realiza o encadeamento do layout com a classe correspondente, eliminando a necessidade de referenciar diretamente o XML. Em seguida, ele infla o layout para adaptá-lo à tela através do Parent.
-<div>
- <img src="show/recyclerview.png">
-</div>
 
 ## Gerenciamento do Banco de Dados (SQLiteHelper)
 
@@ -35,6 +32,9 @@ Para a criação do banco de tarefas foi utilziado o SQLiteHelper do Android o q
 <div>
  <img src="show/sgbd.png">
 </div>
+
+### Adicionando Tarefas
+
 
 
 ## Acompanhe o desenvolvimento desta e outras aplicações em
